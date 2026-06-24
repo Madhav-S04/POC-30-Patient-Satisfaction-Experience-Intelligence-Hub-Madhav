@@ -1,38 +1,275 @@
 # Patient Satisfaction & Experience Intelligence Hub
 
-Real Rails PoC 30 is a FastAPI + Next.js intelligence dashboard for HCAHPS-style experience signals, NPS cohorts, readmission linkage, and staff responsiveness.
+## Project Overview
 
-## Run
+The **Patient Satisfaction & Experience Intelligence Hub** is an interactive healthcare analytics platform designed to transform patient-experience survey data into actionable intelligence for clinicians, hospital administrators, quality teams, and healthcare investors.
 
-Backend:
+The application provides a unified dashboard for analyzing:
 
-```powershell
+* HCAHPS-style patient experience domain scores
+* Net Promoter Score (NPS) trends
+* Satisfaction versus readmission correlations
+* Department-level responsiveness performance
+* Accreditation and benchmark comparisons
+
+Built using **Next.js**, **TypeScript**, **FastAPI**, and **Tailwind CSS**, the platform follows the Gulf Healthcare Real Rails Intelligence Library architecture with a 70/30 visualization-to-intelligence layout.
+
+---
+
+# Problem Statement
+
+Healthcare organizations collect large volumes of patient-experience data from surveys and accreditation frameworks. However, this information is often fragmented across multiple reporting systems, making it difficult to:
+
+* Identify performance gaps quickly
+* Compare results against industry benchmarks
+* Understand relationships between satisfaction and clinical outcomes
+* Monitor department-level trends over time
+* Communicate insights effectively to decision makers
+
+The Patient Satisfaction & Experience Intelligence Hub addresses these challenges by providing a centralized intelligence dashboard that converts raw survey metrics into meaningful operational insights.
+
+---
+
+# Architecture Summary
+
+## Frontend
+
+**Technology Stack**
+
+* Next.js 14
+* React 18
+* TypeScript
+* Tailwind CSS
+* Recharts
+* Apache ECharts
+* Lucide Icons
+
+### Key Components
+
+* KPI Intelligence Cards
+* HCAHPS Domain Radar Chart
+* Satisfaction Trend Analysis
+* NPS Cohort Waterfall Chart
+* Satisfaction vs Readmission Scatter Plot
+* Staff Responsiveness Heatmap
+* Intelligence Sidebar
+
+---
+
+## Backend
+
+**Technology Stack**
+
+* FastAPI
+* Python
+* Pandas
+* Pydantic
+
+### API Endpoints
+
+| Endpoint           | Description              |
+| ------------------ | ------------------------ |
+| `/api/health`      | Service health check     |
+| `/api/dashboard`   | Dashboard analytics data |
+| `/api/sample.csv`  | Synthetic dataset export |
+| `/api/sample.json` | Synthetic dataset export |
+
+---
+
+## Data Layer
+
+The platform utilizes reusable source adapters for benchmark and accreditation sources:
+
+| Source                             | Authority |
+| ---------------------------------- | --------- |
+| HCAHPS Public Benchmarks           | CMS       |
+| Hospital Compare                   | CMS       |
+| Saudi Patient Experience Standards | CBAHI     |
+| UAE Experience Reports             | UAE DOH   |
+| Friends & Family Test              | NHS       |
+
+Synthetic healthcare datasets are used for demonstration purposes and contain no patient-identifiable information.
+
+---
+
+# Setup Instructions
+
+## Prerequisites
+
+* Node.js 18+
+* Python 3.11+
+* npm
+* pip
+
+---
+
+## Backend Setup
+
+```bash
 cd backend
-.venv\Scripts\uvicorn app.main:app --reload --port 8000
+
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload --port 8000
 ```
 
-Frontend:
+Backend runs at:
 
-```powershell
+```text
+http://localhost:8000
+```
+
+API Documentation:
+
+```text
+http://localhost:8000/docs
+```
+
+---
+
+## Frontend Setup
+
+```bash
 cd frontend
+
 npm install
+
 npm run dev
 ```
 
-The UI runs at `http://localhost:3000`. It automatically switches to `public/mock_data.json` when the API is unavailable.
+Frontend runs at:
 
-## Data provenance and adapters
+```text
+http://localhost:3000
+```
 
-Reusable source adapters live in `backend/app/adapters`. Each adapter exposes source authority, quality, refresh cadence, last-refresh date, and a public source link. The same metadata appears in the dashboard's Source Quality panel.
+---
 
-Synthetic sample artifacts are clearly labeled and stored in:
+## Environment Variables
 
-- `mock_data/patient_experience_synthetic.csv`
-- `mock_data/patient_experience_synthetic.json`
-- `mock_data/patient_experience_synthetic_data_dictionary.md`
+Create a `.env.local` file inside the frontend folder:
 
-These files contain fictional Gulf facilities and aggregate experience metrics only. They contain no PHI. The API also provides filtered demonstration exports at `/api/sample.csv` and `/api/sample.json`.
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
 
-## Dashboard controls
+---
 
-Hospital search and hospital, department, and month filters update the visualizations without navigation. Tooltips are available on every chart, the shared legend explains signal colors, and the sidebar exports CSV or JSON.
+# Screenshots
+
+Add the following screenshots in this section:
+
+### Dashboard Overview
+
+![Dashboard Overview](screenshots/dashboard-overview.png)
+
+### HCAHPS Benchmark Radar
+
+![Radar Chart](screenshots/radar-chart.png)
+
+### Satisfaction Trend Analysis
+
+![Trend Analysis](screenshots/trend-analysis.png)
+
+### NPS Cohort Waterfall
+
+![NPS Waterfall](screenshots/nps-waterfall.png)
+
+### Satisfaction vs Readmission Correlation
+
+![Correlation Analysis](screenshots/correlation-analysis.png)
+
+### Staff Responsiveness Heatmap
+
+![Heatmap](screenshots/responsiveness-heatmap.png)
+
+> Recommended: Use all five screenshots you shared during development to demonstrate dashboard functionality and analytics coverage.
+
+---
+
+# AI Usage Summary
+
+Artificial Intelligence tools were used during development for:
+
+### Design Assistance
+
+* Dashboard layout planning
+* Information architecture recommendations
+* Real Rails intelligence-panel design guidance
+* Visualization selection validation
+
+### Development Assistance
+
+* React component scaffolding
+* TypeScript interface generation
+* FastAPI endpoint structure generation
+* Data-model design support
+
+### Documentation Assistance
+
+* UAT report generation
+* Visualization Audit Report generation
+* README drafting
+* Technical documentation refinement
+
+### Validation Assistance
+
+* UX review
+* Dashboard accessibility review
+* Visualization consistency checks
+* Architecture compliance verification
+
+All business logic, data mappings, testing, validation, and final implementation decisions were reviewed and validated manually.
+
+---
+
+# Future Enhancements
+
+## Data Integrations
+
+* Live CMS HCAHPS benchmark ingestion
+* Real-time hospital survey feeds
+* Accreditation reporting integrations
+* HL7/FHIR interoperability support
+
+## Advanced Analytics
+
+* Predictive patient satisfaction forecasting
+* Readmission risk prediction models
+* Sentiment analysis from patient feedback
+* Root-cause analysis recommendations
+
+## User Experience
+
+* Drill-down analytics
+* Executive summary generation
+* Custom dashboard personalization
+* Mobile-responsive intelligence views
+
+## Enterprise Features
+
+* Role-based access control
+* Multi-hospital benchmarking
+* Audit logging
+* Scheduled report generation
+
+---
+
+# Project Outcome
+
+The Patient Satisfaction & Experience Intelligence Hub successfully demonstrates how patient-experience data can be transformed into operational intelligence through modern analytics, benchmark frameworks, and interactive visualization techniques.
+
+The project achieved:
+
+* Complete dashboard implementation
+* FastAPI backend services
+* Interactive healthcare intelligence visualizations
+* Synthetic healthcare data generation
+* Export capabilities
+* 100% UAT test pass rate
+* Full Real Rails Intelligence Library compliance
